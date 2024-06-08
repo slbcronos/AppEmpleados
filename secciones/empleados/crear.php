@@ -6,7 +6,7 @@
         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" enctype="multipart/form-data">
 
         <div class="mb-3">
-            <label for="primernombre" class="form-label">Primer nombre</label>
+            <label for="primernombre" class="form-label"><strong>Primer nombre</strong></label>
             <input
                 type="text"
                 class="form-control"
@@ -18,7 +18,7 @@
         </div>
 
         <div class="mb-3">
-            <label for="segundonombre" class="form-label">Segundo nombre</label>
+            <label for="segundonombre" class="form-label"><strong>Segundo nombre</strong></label>
             <input
                 type="text"
                 class="form-control"
@@ -30,7 +30,7 @@
         </div>
 
         <div class="mb-3">
-            <label for="primerapellido" class="form-label">Primer Apellido</label>
+            <label for="primerapellido" class="form-label"><strong>Primer Apellido</strong></label>
             <input
                 type="text"
                 class="form-control"
@@ -42,7 +42,7 @@
         </div>
 
         <div class="mb-3">
-            <label for="segundoapellido" class="form-label">Segundo Apellido</label>
+            <label for="segundoapellido" class="form-label"><strong>Segundo Apellido</strong></label>
             <input
                 type="text"
                 class="form-control"
@@ -54,7 +54,7 @@
         </div>
 
         <div class="mb-3">
-            <label for="foto" class="form-label">Foto</label>
+            <label for="foto" class="form-label"><strong>Foto</strong></label>
             <input
                 type="file"
                 class="form-control"
@@ -66,7 +66,7 @@
         </div>
 
         <div class="mb-3">
-            <label for="cv" class="form-label">CV(PDF)</label>
+            <label for="cv" class="form-label"><strong>CV(PDF)</strong></label>
             <input
                 type="file"
                 class="form-control"
@@ -78,7 +78,7 @@
         </div>
 
         <div class="mb-3">
-            <label for="idpuesto" class="form-label">Puesto:</label>
+            <label for="idpuesto" class="form-label"><strong>Puesto</strong></label>
             <select
                 class="form-select form-select-sm"
                 name="idpuesto"
@@ -92,7 +92,7 @@
         </div>
         
         <div class="mb-3">
-            <label for="fechadeingreso" class="form-label">Fecha de Ingreso:</label>
+            <label for="fechadeingreso" class="form-label"><strong>Fecha de Ingreso</strong></label>
             <input
                 type="date"
                 class="form-control"
