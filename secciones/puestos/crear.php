@@ -57,11 +57,9 @@ echo ("<meta http-equiv='refresh' content='1'>"); //Refresh by HTTP 'meta'
                 class="btn btn-danger"
                 href="index.php"
                 role="button"
-                >Cancelar</a
-            >
-            
-            
-            
+                >Cancelar
+            </a>
+
         </form>
     </div>
 
