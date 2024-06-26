@@ -1,3 +1,63 @@
+<?php
+include ("../../bd.php");
+
+if($_POST){
+
+    //print_r($_POST);
+    //print_r($_FILES);
+
+    //validamos que la variable nombredepuesto es enviada por POST, ? SI NO, la variable esta "" (vacia).
+    $primernombre =(isset($_POST['primernombre'])?$_POST['primernombre']:'');
+    $segundonombre =(isset($_POST['segundonombre'])?$_POST['segundonombre']:'');
+    $primerapellido =(isset($_POST['primerapellido'])?$_POST['primerapellido']:'');
+    $segundoapellido =(isset($_POST['segundoapellido'])?$_POST['segundoapellido']:'');
+
+    $foto =(isset($_FILES['foto']['name'])?$_FILES['foto']['name']:'');
+    $cv =(isset($_FILES['cv']['name'])?$_FILES['cv']['name']:'');
+
+    $idpuesto =(isset($_POST['idpuesto'])?$_POST['idpuesto']:'');
+    $fechadeingreso =(isset($_POST['fechadeingreso'])?$_POST['fechadeingreso']:'');
+
+    //sentencia de agregar datos
+    $sentencia=$conexion->prepare("INSERT INTO `tbl_empleados` (`id`, `primernombre`, `segundonombre`, `primerapellido`, `segundoapellido`, `foto`, `cv`, `idpuesto`, `fechadeingreso`) 
+    VALUES (NULL, :primernombre, :segundonombre,:primerapellido,:segundoapellido,:foto,:cv,:idpuesto,:fechadeingreso);");
+
+    $sentencia->bindParam(':primernombre', $primernombre);
+    $sentencia->bindParam(':segundonombre', $segundonombre);
+    $sentencia->bindParam(':primerapellido', $primerapellido);
+    $sentencia->bindParam(':segundoapellido', $segundoapellido);
+        //adjuntar foto
+        $fecha_=new DateTime();
+        $nombreArchivo_foto = ($foto!='')?$fecha_->getTimestamp() . "_" . $_FILES['foto']['name']:"";
+        $tmp_foto = $_FILES['foto']['tmp_name'];    
+        if ($tmp_foto!='') {
+            move_uploaded_file($tmp_foto, "./img/".$nombreArchivo_foto);
+        }
+    $sentencia->bindParam(':foto', $nombreArchivo_foto);
+
+    
+    $nombreArchivo_cv = ($cv!='')?$fecha_->getTimestamp() . "_" . $_FILES['cv']['name']:"";
+    $tmp_cv = $_FILES['cv']['tmp_name'];    
+    if ($tmp_cv!='') {
+        move_uploaded_file($tmp_cv, "./pdf/".$nombreArchivo_cv);
+    }
+    $sentencia->bindParam(':cv', $nombreArchivo_cv);
+    $sentencia->bindParam(':idpuesto', $idpuesto);
+    $sentencia->bindParam(':fechadeingreso', $fechadeingreso);
+
+    $sentencia->execute();
+
+
+}
+
+//selector para puestos
+$sentencia = $conexion->prepare("SELECT * FROM tbl_puestos");
+$sentencia->execute();
+$lista_tbl_puestos = $sentencia->fetchAll(PDO::FETCH_ASSOC);
+
+
+?>
+
 <?php include ('../../templates/header.php'); ?>
 <br/>
 <div class="card">
@@ -79,16 +139,14 @@
 
         <div class="mb-3">
             <label for="idpuesto" class="form-label"><strong>Puesto</strong></label>
-            <select
-                class="form-select form-select-sm"
-                name="idpuesto"
-                id="idpuesto"
-            >
-                <option selected>Select one</option>
-                <option value="">New Delhi</option>
-                <option value="">Istanbul</option>
-                <option value="">Jakarta</option>
+            <select class="form-select form-select-sm"name="idpuesto"id="idpuesto">
+            <?php foreach($lista_tbl_puestos as $puesto) { ?>
+                <option value="<?php echo $puesto['id']; ?>">
+                    <?php echo $puesto['nombredelpuesto']; ?></option>
+
+                <?php }?>
             </select>
+            
         </div>
         
         <div class="mb-3">

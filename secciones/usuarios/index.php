@@ -45,7 +45,7 @@ $lista_tbl_usuarios = $sentencia->fetchAll(PDO::FETCH_ASSOC);
                         <tr class="">
                             <td scope="row"><?php echo $usuario['id']; ?></td>
                             <td><?php echo $usuario['usuario']; ?></td>
-                            <td><?php echo $usuario['password']; ?></td>
+                            <td>*****</td>
                             <td><?php echo $usuario['correo']; ?></td>
 
                             <td>
