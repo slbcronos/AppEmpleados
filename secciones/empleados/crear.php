@@ -46,7 +46,7 @@ if($_POST){
     $sentencia->bindParam(':fechadeingreso', $fechadeingreso);
 
     $sentencia->execute();
-
+    echo ("<meta http-equiv='refresh' content='1'>"); //Refresh by HTTP 'meta'
 
 }
 

@@ -1,6 +1,41 @@
 <?php
 include ("../../bd.php");
 
+if (isset($_GET['txtID'])) {
+    $txtID = (isset($_GET['txtID'])) ? $_GET['txtID'] : "";
+
+    //buscar archivo relacionado con empleados
+    $sentencia = $conexion->prepare("SELECT foto,cv FROM `tbl_empleados` WHERE id=:id");
+    $sentencia->bindParam(':id', $txtID);
+    $sentencia->execute();
+    $registro_recuperado = $sentencia->fetch(PDO::FETCH_LAZY);
+
+    //print_r($registro_recuperado);
+
+    if(isset($registro_recuperado["foto"])&&$registro_recuperado["foto"]!=""){
+        if (file_exists("./img/".$registro_recuperado["foto"])) {
+            unlink("./img/".$registro_recuperado["foto"]);
+            # code...
+        }
+
+    }
+    if(isset($registro_recuperado["cv"])&&$registro_recuperado["cv"]!=""){
+        if (file_exists("./pdf/".$registro_recuperado["cv"])) {
+            unlink("./pdf/".$registro_recuperado["cv"]);
+            # code...
+        }
+
+    }
+ 
+
+    
+    $sentencia = $conexion->prepare("DELETE  FROM tbl_empleados WHERE id =:id"); // elimina el id seleccionado
+    $sentencia->bindParam(':id', $txtID);
+    $sentencia->execute();
+    echo ("<meta http-equiv='refresh' content='1'>"); //Refresh by HTTP 'meta'
+    
+}
+
 
 $sentencia = $conexion->prepare("SELECT *,
 (SELECT nombredelpuesto 
@@ -28,7 +63,7 @@ $lista_tbl_empleados = $sentencia->fetchAll(PDO::FETCH_ASSOC);
     <div class="card-body">
 
         <div class="table-responsive-sm">
-            <table class="table table-primary">
+            <table class="table table-primary" id="tabla_id">
                 <thead>
                     <tr>
                         <th scope="col">ID</th>
@@ -42,29 +77,32 @@ $lista_tbl_empleados = $sentencia->fetchAll(PDO::FETCH_ASSOC);
                 </thead>
                 <tbody>
 
-                <?php foreach($lista_tbl_empleados as $empleado) { ?>
-                    <tr class="">
-                        <td><?php  echo $empleado['id']; ?></td>
-                        <td>
-                            <?php  echo $empleado['primernombre']; ?>
-                            <?php  echo $empleado['segundonombre']; ?>
-                            <?php  echo $empleado['primerapellido']; ?>
-                            <?php  echo $empleado['segundoapellido']; ?>
-                        </td>
-                        <td>
-                            <img src="./img/<?php  echo $empleado['foto']; ?>" alt="" class="img-fluid rounded" width="50"/>
-                            
-                        </td>
-                        <td><?php  echo $empleado['cv']; ?></td>
-                        <td><?php  echo $empleado['puesto']; ?></td>
-                        <td><?php  echo $empleado['fechadeingreso']; ?></td>
-                        <td>
-                            <a name="" id="" class="btn btn-primary" href="#" role="button">Carta</a>
-                            <a name="" id="" class="btn btn-warning" href="#" role="button">Editar</a>
-                            <a name="" id="" class="btn btn-danger" href="#" role="button">Eliminar</a>
-                        </td>
-                    </tr>
-                    <?php }?>
+                    <?php foreach ($lista_tbl_empleados as $empleado) { ?>
+                        <tr class="">
+                            <td><?php echo $empleado['id']; ?></td>
+                            <td>
+                                <?php echo $empleado['primernombre']; ?>
+                                <?php echo $empleado['segundonombre']; ?>
+                                <?php echo $empleado['primerapellido']; ?>
+                                <?php echo $empleado['segundoapellido']; ?>
+                            </td>
+                            <td>
+                                <img src="./img/<?php echo $empleado['foto']; ?>" alt="" class="img-fluid rounded"
+                                    width="90" />
+
+                            </td>
+                            <td><?php echo $empleado['cv']; ?></td>
+                            <td><?php echo $empleado['puesto']; ?></td>
+                            <td><?php echo $empleado['fechadeingreso']; ?></td>
+                            <td>
+                                <a name="" id="" class="btn btn-primary" href="#" role="button">Carta</a>
+                                <a name="" id="" class="btn btn-primary"
+                                    href="editar.php?txtID= <?php echo $empleado['id']; ?>" role="button">Editar</a>
+                                <a name="" id="" class="btn btn-danger"
+                                    href="index.php?txtID= <?php echo $empleado['id']; ?>" role="button">Eliminar</a>
+                            </td>
+                        </tr>
+                    <?php } ?>
                 </tbody>
             </table>
         </div>
