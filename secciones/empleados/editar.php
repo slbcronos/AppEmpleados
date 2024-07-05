@@ -118,7 +118,8 @@ if ($_POST) {
         $sentencia->execute();
     }
 
-    header("Location:index.php");
+    $mensaje="Registro Actualizado";
+    header("Location:index.php?mensaje=".$mensaje);
     //echo ("<meta http-equiv='refresh' content='1'>"); //Refresh by HTTP 'meta'
 
 }

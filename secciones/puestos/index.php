@@ -1,13 +1,16 @@
-<?php 
-include("../../bd.php");
+<?php
+include ("../../bd.php");
 //para borrar el dato, se envia a la url por medio del boton el id a ser eliminado
-if(isset($_GET['txtID'])){
-    $txtID = (isset($_GET['txtID']))?$_GET['txtID']:"";
+if (isset($_GET['txtID'])) {
+    $txtID = (isset($_GET['txtID'])) ? $_GET['txtID'] : "";
 
-    $sentencia = $conexion->prepare("DELETE  FROM tbl_puestos WHERE id =:id") ; // elimina el id seleccionado
-    $sentencia->bindParam(':id',$txtID);
+    $sentencia = $conexion->prepare("DELETE  FROM tbl_puestos WHERE id =:id"); // elimina el id seleccionado
+    $sentencia->bindParam(':id', $txtID);
     $sentencia->execute();
-    echo ("<meta http-equiv='refresh' content='1'>"); //Refresh by HTTP 'meta'
+    $mensaje="Registro Eliminado";
+    header("Location:index.php?mensaje=".$mensaje);
+
+    //echo ("<meta http-equiv='refresh' content='1'>"); //Refresh by HTTP 'meta'
 
 }
 /////////////////////////////////--------------------------------------------------------------
@@ -23,22 +26,17 @@ $lista_tbl_puestos = $sentencia->fetchAll(PDO::FETCH_ASSOC);
 
 
 <?php include ('../../templates/header.php'); ?>
-<br/>
+
+
+<br />
 <div class="card">
     <div class="card-header">
-        <a
-            name=""
-            id=""
-            class="btn btn-primary"
-            href="crear.php"
-            role="button"
-            >Agregar Registro</a
-        >
-        
+        <a name="" id="" class="btn btn-primary" href="crear.php" role="button">Agregar Registro</a>
+
     </div>
     <div class="card-body">
         <div class="table-responsive-sm">
-            <table class="table table-secondary"id="tabla_id">
+            <table class="table table-secondary" id="tabla_id">
                 <thead>
                     <tr>
                         <th scope="col">ID</th>
@@ -48,41 +46,24 @@ $lista_tbl_puestos = $sentencia->fetchAll(PDO::FETCH_ASSOC);
                 </thead>
                 <tbody>
 
-                <?php foreach($lista_tbl_puestos as $puesto) { ?>
+                    <?php foreach ($lista_tbl_puestos as $puesto) { ?>
 
-                    <tr class="">
-                        <td scope="row"><?php  echo $puesto['id']; ?></td>
-                        <td ><?php  echo $puesto['nombredelpuesto']; ?></td>
-                        
-                        <td>
-                        <a
-                            name=""
-                            id=""
-                            class="btn btn-primary"
-                            href="editar.php?txtID= <?php echo $puesto['id']; ?>"
+                        <tr class="">
+                            <td scope="row"><?php echo $puesto['id']; ?></td>
+                            <td><?php echo $puesto['nombredelpuesto']; ?></td>
 
-                            role="button"
-                            >Editar</a
-                        >
-                        <a
-                            name=""
-                            id=""
-                            class="btn btn-danger"
-                            href="index.php?txtID= <?php echo $puesto['id']; ?>"
+                            <td>
+                                <a class="btn btn-primary" href="editar.php?txtID=<?php echo $puesto['id']; ?>"
+                                    role="button">Editar</a>
 
-                            role="button"
-                            >Eliminar</a
-                        >
-                        
+                                |
+                                <a class="btn btn-danger" href="javascript:borrar(<?php echo $puesto['id']; ?>);"
+                                    role="button">Eliminar</a>
 
-                        </td>
+                            </td>
+                        </tr>
 
-                    </tr>
-
-                    <?php }?>
-
-
-
+                    <?php } ?>
 
                 </tbody>
             </table>

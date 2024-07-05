@@ -37,7 +37,8 @@ if ($_POST) {
      $sentencia->bindParam(':id', $txtID);
      $sentencia->execute();
      //echo ("<meta http-equiv='refresh' content='1'>"); //Refresh by HTTP 'meta'
-     header("Location:index.php");
+     $mensaje="Registro Actualizado";
+     header("Location:index.php?mensaje=".$mensaje);
  }
 
 ?>

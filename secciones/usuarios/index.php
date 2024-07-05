@@ -7,7 +7,9 @@ if(isset($_GET['txtID'])){
     $sentencia = $conexion->prepare("DELETE  FROM tbl_usuarios WHERE id =:id") ; // elimina el id seleccionado
     $sentencia->bindParam(':id',$txtID);
     $sentencia->execute();
-    echo ("<meta http-equiv='refresh' content='1'>"); //Refresh by HTTP 'meta'
+    //echo ("<meta http-equiv='refresh' content='1'>"); //Refresh by HTTP 'meta'
+    $mensaje="Registro Eliminado";
+    header("Location:index.php?mensaje=".$mensaje);
 
 }
 /////////////////////////////////--------------------------------------------------------------
@@ -62,7 +64,7 @@ $lista_tbl_usuarios = $sentencia->fetchAll(PDO::FETCH_ASSOC);
                             name=""
                             id=""
                             class="btn btn-danger"
-                            href="index.php?txtID= <?php echo $usuario['id']; ?>"
+                            href="javascript:borrar(<?php echo $usuario['id']; ?>)"
 
                             role="button"
                             >Eliminar</a

@@ -16,7 +16,11 @@ $sentencia=$conexion->prepare("INSERT INTO `tbl_puestos` (`id`, `nombredelpuesto
 //asignando los vales que bienen del metodo post, osea los del formulario
 $sentencia->bindParam(':nombredelpuesto', $nombredelpuesto);
 $sentencia->execute();
-echo ("<meta http-equiv='refresh' content='1'>"); //Refresh by HTTP 'meta'
+
+//echo ("<meta http-equiv='refresh' content='1'>"); //Refresh by HTTP 'meta'
+//echo ("<script>location.href='index.php'</script>"); //Refresh by JavaScript 'script
+$mensaje="Registro Creado";
+header("Location:index.php?mensaje=".$mensaje);
 
 }
 

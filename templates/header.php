@@ -20,6 +20,10 @@ $url_base = "http://localhost/AppEmpleados/";
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.css" />
 
     <script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
 </head>
 
 <body>
@@ -51,3 +55,8 @@ $url_base = "http://localhost/AppEmpleados/";
     </nav>
 
     <main class="container">
+        <?php if (isset($_GET['mensaje'])) { ?>
+            <script>
+                Swal.fire({ icon: "success", title: "<?php echo $_GET['mensaje']; ?>", showConfirmButton: false, timer: 1500 });
+            </script>
+        <?php } ?>

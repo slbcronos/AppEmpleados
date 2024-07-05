@@ -46,7 +46,9 @@ if($_POST){
     $sentencia->bindParam(':fechadeingreso', $fechadeingreso);
 
     $sentencia->execute();
-    echo ("<meta http-equiv='refresh' content='1'>"); //Refresh by HTTP 'meta'
+    //echo ("<meta http-equiv='refresh' content='1'>"); //Refresh by HTTP 'meta'
+    $mensaje="Registro Creado";
+    header("Location:index.php?mensaje=".$mensaje); 
 
 }
 

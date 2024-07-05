@@ -32,7 +32,9 @@ if (isset($_GET['txtID'])) {
     $sentencia = $conexion->prepare("DELETE  FROM tbl_empleados WHERE id =:id"); // elimina el id seleccionado
     $sentencia->bindParam(':id', $txtID);
     $sentencia->execute();
-    echo ("<meta http-equiv='refresh' content='1'>"); //Refresh by HTTP 'meta'
+    //echo ("<meta http-equiv='refresh' content='1'>"); //Refresh by HTTP 'meta'
+    $mensaje="Registro Eliminado";
+    header("Location:index.php?mensaje=".$mensaje);
     
 }
 
@@ -106,7 +108,7 @@ $lista_tbl_empleados = $sentencia->fetchAll(PDO::FETCH_ASSOC);
                                 <a name="" id="" class="btn btn-primary"
                                     href="editar.php?txtID= <?php echo $empleado['id']; ?>" role="button">Editar</a>
                                 <a name="" id="" class="btn btn-danger"
-                                    href="index.php?txtID= <?php echo $empleado['id']; ?>" role="button">Eliminar</a>
+                                    href="javascript:borrar(<?php echo $empleado['id']; ?>);" role="button">Eliminar</a>
                             </td>
                         </tr>
                     <?php } ?>
