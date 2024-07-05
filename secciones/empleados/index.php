@@ -91,11 +91,18 @@ $lista_tbl_empleados = $sentencia->fetchAll(PDO::FETCH_ASSOC);
                                     width="90" />
 
                             </td>
-                            <td><?php echo $empleado['cv']; ?></td>
+                            <td>
+                                <a href="./pdf/<?php echo $empleado['cv']; ?>">
+                                <?php echo $empleado['cv']; ?>
+                                </a>
+                                
+                            </td>
                             <td><?php echo $empleado['puesto']; ?></td>
                             <td><?php echo $empleado['fechadeingreso']; ?></td>
                             <td>
-                                <a name="" id="" class="btn btn-primary" href="#" role="button">Carta</a>
+                                <a name="" id="" class="btn btn-primary" href="carta_recomendacion.php?txtID= <?php echo $empleado['id']; ?>" role="button">Carta
+                                    
+                                </a>
                                 <a name="" id="" class="btn btn-primary"
                                     href="editar.php?txtID= <?php echo $empleado['id']; ?>" role="button">Editar</a>
                                 <a name="" id="" class="btn btn-danger"
