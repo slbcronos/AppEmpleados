@@ -1,10 +1,17 @@
 <?php
+
+session_start();
+
 $url_base = "http://localhost/AppEmpleados/";
+
+if(!isset($_SESSION['usuario'])){
+    header("Location:" .$url_base."login.php");
+}
 
 
 ?>
 <!doctype html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <title>Title</title>
@@ -48,7 +55,7 @@ $url_base = "http://localhost/AppEmpleados/";
                 <a class="nav-link" href="<?php echo $url_base; ?>secciones/usuarios/">Usuarios</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Cerrar Sesion</a>
+                <a class="nav-link" href="<?php echo $url_base; ?>cerrar.php">Cerrar Sesion</a>
             </li>
 
         </ul>

@@ -1,15 +1,15 @@
 <?php
 include ("../../bd.php");
 //para borrar el dato, se envia a la url por medio del boton el id a ser eliminado
-if(isset($_GET['txtID'])){
-    $txtID = (isset($_GET['txtID']))?$_GET['txtID']:"";
+if (isset($_GET['txtID'])) {
+    $txtID = (isset($_GET['txtID'])) ? $_GET['txtID'] : "";
 
-    $sentencia = $conexion->prepare("DELETE  FROM tbl_usuarios WHERE id =:id") ; // elimina el id seleccionado
-    $sentencia->bindParam(':id',$txtID);
+    $sentencia = $conexion->prepare("DELETE  FROM tbl_usuarios WHERE id =:id"); // elimina el id seleccionado
+    $sentencia->bindParam(':id', $txtID);
     $sentencia->execute();
     //echo ("<meta http-equiv='refresh' content='1'>"); //Refresh by HTTP 'meta'
-    $mensaje="Registro Eliminado";
-    header("Location:index.php?mensaje=".$mensaje);
+    $mensaje = "Registro Eliminado";
+    header("Location:index.php?mensaje=" . $mensaje);
 
 }
 /////////////////////////////////--------------------------------------------------------------
@@ -51,25 +51,11 @@ $lista_tbl_usuarios = $sentencia->fetchAll(PDO::FETCH_ASSOC);
                             <td><?php echo $usuario['correo']; ?></td>
 
                             <td>
-                            <a
-                            name=""
-                            id=""
-                            class="btn btn-primary"
-                            href="editar.php?txtID= <?php echo $usuario['id']; ?>"
+                                <a name="" id="" class="btn btn-primary"
+                                    href="editar.php?txtID= <?php echo $usuario['id']; ?>" role="button">Editar</a>
+                                <a name="" id="" class="btn btn-danger"
+                                    href="javascript:borrar(<?php echo $usuario['id']; ?>)" role="button">Eliminar</a>
 
-                            role="button"
-                            >Editar</a
-                        >
-                        <a
-                            name=""
-                            id=""
-                            class="btn btn-danger"
-                            href="javascript:borrar(<?php echo $usuario['id']; ?>)"
-
-                            role="button"
-                            >Eliminar</a
-                        >
-                    
                             </td>
                         </tr>
                     <?php } ?>
