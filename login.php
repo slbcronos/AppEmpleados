@@ -47,18 +47,19 @@ if ($_POST) {
     <header>
         <!-- place navbar here -->
     </header>
+ 
     <br />
-    <br /><br />
 
     <main class="container">
         <div class="row">
             <div class="col-md-4">
+                
             </div>
-
 
             <div class="col-md-4">
                 <div class="card">
-                    <div class="card-header">Login</div>
+                <img src="login.png"class="img-fluid rounded-top"alt=""/>
+                    <div class="card-header"><strong>Login</strong></div>
                     <div class="card-body">
                         <?php if (isset($mensaje)) { ?>
 
@@ -82,7 +83,6 @@ if ($_POST) {
                             <button type="submit" class="btn btn-primary">
                                 Entrar al Sistema
                             </button>
-
 
                         </form>
                     </div>
