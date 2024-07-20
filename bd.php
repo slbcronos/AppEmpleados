@@ -1,9 +1,19 @@
 <?php 
 //conexion a la base de datos
+
+//remota
+$servidor = "a2nlmysql55plsk.secureserver.net";
+$usuario = "salvador_lopez";
+$contrasenia = "Lomogel1511$";
+$bd = "appempleados";
+/*
+//local
 $servidor = "localhost";
 $usuario = "root";
 $contrasenia = "";
 $bd = "appempleados";
+*/
+
 
 // Crear conexión
 try{
