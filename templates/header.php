@@ -2,7 +2,8 @@
 
 session_start();
 
-$url_base = "http://localhost/AppEmpleados/";
+$url_base = "https://www.slcomputacion.com/empleados/";
+//$url_base = "http://localhost/AppEmpleados/";
 
 if(!isset($_SESSION['usuario'])){
     header("Location:" .$url_base."login.php");
